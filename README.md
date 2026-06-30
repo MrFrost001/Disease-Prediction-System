@@ -98,43 +98,7 @@ The model:
 
 ---
 
-# 📥 Installation
 
-Clone repository:
-
-```bash
-git clone https://github.com/yourusername/DiseasePredictionSystem.git
-```
-
-Move into project:
-
-```bash
-cd DiseasePredictionSystem
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run migrations:
-
-```bash
-python manage.py migrate
-```
-
-Start server:
-
-```bash
-python manage.py runserver
-```
-
-Open browser:
-
-```text
-http://127.0.0.1:8000
-```
 
 ---
 
