@@ -96,12 +96,6 @@ The model:
 
 ---
 
----
-
-
-
----
-
 # 🎯 Real World Applications
 
 - Preliminary healthcare screening
