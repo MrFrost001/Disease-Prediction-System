@@ -1,0 +1,51 @@
+{% extends "parent.html" %}
+{% block main %}
+  <div class="history-head">
+  <h2 class="section" style="text-align:left;margin:0">Medical History</h2>
+
+  <div>
+    <a href="{% url 'prediction' %}" class="btn btn-outline">
+      + New Prediction
+    </a>
+
+    {% if history %}
+    <form method="POST"
+          action="{% url 'clear_history' %}"
+          style="display:inline;">
+      {% csrf_token %}
+
+      <button
+        type="submit"
+        class="btn btn-outline"
+        onclick="return confirm('Are you sure you want to clear all prediction history?');">
+        Clear History
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+  <p style="color:var(--muted);margin:.2rem 0 1rem">A list of every prediction made on this server.</p>
+
+  {% if history %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Id</th><th>Date</th><th>Symptoms</th><th>Predicted Disease</th></tr></thead>
+      <tbody>
+        {% for r in history %}
+        <tr>
+          <td style="font-family:monospace;color:var(--muted)">{{ r.id }}</td>
+          <td>{{ r.created_at|date:"Y-m-d H:i" }}</td>
+          <td>{{ r.symptoms|join:", " }}</td>
+          <td style="color:var(--primary);font-weight:600">{{ r.predicted_disease }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty">
+    <p><b>No history yet</b></p>
+    <p style="color:var(--muted)">Run your first prediction to see it appear here.</p>
+  </div>
+  {% endif %}
+{% endblock main %}

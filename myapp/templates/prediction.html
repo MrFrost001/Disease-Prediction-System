@@ -1,0 +1,66 @@
+{% extends "parent.html" %}
+{% block main %}
+  <h2 class="section">Disease Prediction</h2>
+  <p class="subtitle">Search and mark every symptom you currently have, then click Predict.</p>
+
+  {% if res %}
+  <div class="result">
+    <div class="lbl">Predicted Condition</div>
+    <div class="val">{{ res }}</div>
+    {% if top_matches %}
+    <div class="table-wrap" style="max-width:420px;margin:.8rem auto 0;">
+      <table>
+        <thead><tr><th>Possible condition</th><th>Confidence</th></tr></thead>
+        <tbody>
+          {% for m in top_matches %}
+          <tr><td>{{ m.disease }}</td><td>{{ m.confidence }}%</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+    <div class="note" style="margin-top:.6rem">Educational result — not medical advice.</div>
+  </div>
+  {% endif %}
+
+  <form method="post" style="margin-top:1.5rem">
+    {% csrf_token %}
+    <div class="search-wrap">
+      <input type="text" class="search" id="symptomSearch" placeholder="Search symptoms..." onkeyup="filterSymptoms()" autocomplete="off">
+      <button type="button" id="searchClear" class="search-clear" aria-label="Clear search" onclick="clearSymptomSearch()">&times;</button>
+    </div>
+    <div class="symptom-grid" id="symptomGrid">
+      {% for s in symptoms %}
+      <label class="symptom-item" for="sym_{{ s.name }}">
+        <input type="checkbox" name="symptoms" value="{{ s.name }}" id="sym_{{ s.name }}"
+               {% if s.name in selected %}checked{% endif %}>
+        {{ s.label }}
+      </label>
+      {% endfor %}
+    </div>
+    <div class="actions">
+      <button type="submit" class="btn btn-primary">Predict</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
+      <a href="{% url 'history' %}" class="btn btn-outline">View History →</a>
+    </div>
+  </form>
+
+  <script>
+    function filterSymptoms() {
+      const input = document.getElementById('symptomSearch');
+      const q = input.value.toLowerCase();
+      document.querySelectorAll('.symptom-item').forEach(function (item) {
+        item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.getElementById('searchClear').style.display = q ? 'flex' : 'none';
+    }
+    function clearSymptomSearch() {
+      const input = document.getElementById('symptomSearch');
+      input.value = '';
+      input.focus();
+      filterSymptoms();
+    }
+    // Initialize clear-button visibility on load (e.g. after a failed form submit)
+    document.addEventListener('DOMContentLoaded', filterSymptoms);
+  </script>
+{% endblock main %}

@@ -1,0 +1,17 @@
+{% extends "parent.html" %}
+{% block main %}
+  <div class="hero">
+    <h2>Check your symptoms in seconds</h2>
+    <p>Select the symptoms you're experiencing and our trained ML model will suggest the most likely condition, with a confidence breakdown. Every prediction is saved to your history.</p>
+  </div>
+  <div class="features">
+    <div class="card"><h3>⚡ ML-Powered Check</h3><p>Search and select from 132 symptoms and get an instant prediction across 41 possible conditions.</p></div>
+    <div class="card"><h3>📋 Track History</h3><p>Every prediction is saved on the server so you can review it later.</p></div>
+    <div class="card"><h3>📊 Confidence Scores</h3><p>See the model's top 3 most likely conditions, not just a single guess.</p></div>
+  </div>
+  <div class="card" style="margin-top:2rem">
+    <h3>How it works</h3>
+    <p>1. Go to <b>Disease Prediction</b>. 2. Search and check every symptom you have. 3. Click <b>Predict</b>. 4. View your saved checks under <b>Medical History</b>.</p>
+    <p style="margin-top:.7rem;color:var(--danger);font-size:.85rem"><b>Disclaimer:</b> This tool does not provide medical advice. Always consult a qualified healthcare provider.</p>
+  </div>
+{% endblock main %}

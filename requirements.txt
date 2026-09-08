@@ -1,0 +1,7 @@
+Django>=5.2
+scikit-learn==1.8.0
+pandas
+joblib
+gunicorn==23.0.0
+whitenoise==6.9.0
+numpy==2.3.1
