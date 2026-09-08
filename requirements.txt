@@ -5,3 +5,5 @@ joblib
 gunicorn==23.0.0
 whitenoise==6.9.0
 numpy==2.3.1
+dj-database-url==2.3.0
+psycopg2-binary==2.9.10
